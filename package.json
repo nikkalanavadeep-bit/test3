@@ -1,0 +1,25 @@
+{
+  "name": "gemini-chatbot-workspace",
+  "version": "1.0.0",
+  "description": "Full-stack Gemini LLM Chatbot with clear frontend and backend separation",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "node backend/server.js",
+    "backend": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "db:migrate": "node backend/scripts/migrate.js",
+    "db:push": "npx supabase db push",
+    "migrate": "node backend/scripts/migrate.js"
+  },
+  "keywords": [
+    "gemini",
+    "llm",
+    "chatbot",
+    "frontend-backend-separation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.3"
+  }
+}
