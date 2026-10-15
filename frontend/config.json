@@ -1,0 +1,6 @@
+{
+  "BACKEND_URL": "https://test3-itxq.onrender.com",
+  "SUPABASE_URL": "https://zzbjjrsoqtlmgehgbnkz.supabase.co",
+  "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp6YmpqcnNvcXRsbWdlaGdibmt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5NjY4NzUsImV4cCI6MjEwNzU0Mjg3NX0.uH9AAbGkAHnO8Aid6IXRTxvDLcfExIsNU7EBiettf4g",
+  "DEFAULT_MODEL": "gemini-1.5-flash"
+}

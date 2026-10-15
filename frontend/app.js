@@ -28,7 +28,13 @@
 
   // --- Application State ---
   const state = {
-    backendUrl: localStorage.getItem('gemini_backend_url') || 'http://localhost:5000',
+    backendUrl: (function() {
+      const stored = localStorage.getItem('gemini_backend_url');
+      if (stored && (!window.location.protocol.startsWith('https') || !stored.includes('localhost'))) {
+        return stored;
+      }
+      return 'https://test3-itxq.onrender.com';
+    })(),
     apiKeyOverride: localStorage.getItem('gemini_api_key_override') || '',
     supabaseUrl: localStorage.getItem('gemini_supabase_url') || '',
     supabaseAnonKey: localStorage.getItem('gemini_supabase_anon_key') || '',
@@ -116,6 +122,22 @@
 
   // --- Environment & Config Loader ---
   async function loadEnvironmentConfigs() {
+    // 0. Try to read config.json if available
+    try {
+      const cfgRes = await fetch('./config.json');
+      if (cfgRes.ok) {
+        const cfg = await cfgRes.json();
+        if (cfg.SUPABASE_URL && !state.supabaseUrl) state.supabaseUrl = cfg.SUPABASE_URL;
+        if (cfg.SUPABASE_ANON_KEY && !state.supabaseAnonKey) state.supabaseAnonKey = cfg.SUPABASE_ANON_KEY;
+        if (cfg.BACKEND_URL && (!state.backendUrl || (window.location.protocol.startsWith('https') && state.backendUrl.includes('localhost')))) {
+          state.backendUrl = cfg.BACKEND_URL;
+        }
+        if (cfg.DEFAULT_MODEL && !state.model) state.model = cfg.DEFAULT_MODEL;
+      }
+    } catch (_) {
+      // Ignore if config.json is not present
+    }
+
     // 1. Try to read frontend/.env if available
     try {
       const envRes = await fetch('./.env');

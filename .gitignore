@@ -84,3 +84,6 @@ scratch/
 # 8. Testing & Coverage
 coverage/
 .nyc_output/
+
+.vercel
+.env*
